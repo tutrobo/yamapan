@@ -1,11 +1,15 @@
 [project]
 name = "yamapan"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.0.1"
+description = "Yet Another MetA worksPAce maNager for ROS 2"
 authors = [
     { name = "Rin Iwai", email = "rin@eyrin.jp" }
 ]
-dependencies = []
+dependencies = [
+    "PyYAML>=6.0.1",
+    "pydantic>=2.7.1",
+    "tomli>=2.0.1",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
