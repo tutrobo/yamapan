@@ -12,11 +12,11 @@ from yamapan.config import (
 
 
 @subcommand("init")
-def init(args: Namespace) -> int:
+def init(namespace: Namespace, args: list[str]) -> int:
     with open(CONFIG_FILENAME, "w") as f:
         f.write(CONFIG_TEMPLATE)
     with open(LOCAL_CONFIG_FILENAME, "w") as f:
-        f.write(LOCAL_CONFIG_TEMPLATE.format(args.ros_install_prefix))
+        f.write(LOCAL_CONFIG_TEMPLATE.format(namespace.ros_install_prefix))
     with open(".gitignore", "w") as f:
         f.write(GITIGNORE_TEMPLATE)
     return 0

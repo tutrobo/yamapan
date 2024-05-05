@@ -5,12 +5,12 @@ parser = ArgumentParser(
     prog="yamapan",
     description="Yet Another MetA worksPAce maNager for ROS 2",
 )
-parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.2")
+parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.3")
 subparsers = parser.add_subparsers()
 
 
 def subcommand(name: str):
-    def _subcommand(handler: Callable[[Namespace], int]):
+    def _subcommand(handler: Callable[[Namespace, list[str]], int]):
         parser = subparsers.add_parser(name)
         parser.set_defaults(handler=handler)
         return parser
@@ -19,9 +19,9 @@ def subcommand(name: str):
 
 
 def main() -> int:
-    args = parser.parse_args()
-    if hasattr(args, "handler"):
-        return args.handler(args)
+    namespace, args = parser.parse_known_args()
+    if hasattr(namespace, "handler"):
+        return namespace.handler(namespace, args)
     else:
         parser.print_help()
         return 1

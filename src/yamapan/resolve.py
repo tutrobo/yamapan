@@ -7,7 +7,7 @@ from yamapan.util import get_workspace_path, load_config, run_command
 
 
 @subcommand("resolve")
-def resolve(_: Namespace) -> int:
+def resolve(namespace: Namespace, args: list[str]) -> int:
     workspace_path = get_workspace_path()
     config = load_config()
     ret = run_command(

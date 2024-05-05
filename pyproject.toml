@@ -1,6 +1,6 @@
 [project]
 name = "yamapan"
-version = "0.0.2"
+version = "0.0.3"
 description = "Yet Another MetA worksPAce maNager for ROS 2"
 license = {file = "LICENSE"}
 authors = [

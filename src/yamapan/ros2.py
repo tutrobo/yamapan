@@ -5,11 +5,8 @@ from yamapan.util import run_command
 
 
 @subcommand("ros2")
-def ros2(args: Namespace) -> int:
+def ros2(namespace: Namespace, args: list[str]) -> int:
     return run_command(
-        f"ros2 {' '.join(args.args)}",
+        f"ros2 {' '.join(args)}",
         ros_env=True,
     )
-
-
-ros2.add_argument("args", nargs="*", help="passed to ros2")
