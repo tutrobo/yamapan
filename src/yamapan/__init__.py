@@ -5,7 +5,7 @@ parser = ArgumentParser(
     prog="yamapan",
     description="Yet Another MetA worksPAce maNager for ROS 2",
 )
-parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.3")
+parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.4")
 subparsers = parser.add_subparsers()
 
 
