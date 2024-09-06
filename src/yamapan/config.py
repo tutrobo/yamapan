@@ -11,12 +11,9 @@ CONFIG_TEMPLATE = """[aliases]
 # "ext/voicevox_ros2" = { type = "git", url = "https://github.com/tutrobo/voicevox_ros2.git", version = "master" }
 """
 
-LOCAL_CONFIG_FILENAME = "yamapan.local.toml"
-LOCAL_CONFIG_TEMPLATE = """ros_install_prefix = "{}"
-"""
+GLOBAL_CONFIG_FILENAME = ".yamapan.toml"
 
-GITIGNORE_TEMPLATE = """yamapan.local.toml
-build/
+GITIGNORE_TEMPLATE = """build/
 install/
 log/
 """
@@ -27,5 +24,5 @@ class Config(BaseModel):
     repositories: dict[str, Any]
 
 
-class LocalConfig(BaseModel):
+class GlobalConfig(BaseModel):
     ros_install_prefix: Path

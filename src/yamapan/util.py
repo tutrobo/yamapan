@@ -4,7 +4,7 @@ from pathlib import Path
 
 import tomli
 
-from yamapan.config import CONFIG_FILENAME, LOCAL_CONFIG_FILENAME, Config, LocalConfig
+from yamapan.config import CONFIG_FILENAME, GLOBAL_CONFIG_FILENAME, Config, GlobalConfig
 
 
 def get_workspace_path() -> Path:
@@ -27,17 +27,23 @@ def load_config() -> Config:
         return Config.model_validate(tomli.load(f))
 
 
-def load_local_config() -> LocalConfig:
-    with open(get_workspace_path() / LOCAL_CONFIG_FILENAME, "rb") as f:
-        return LocalConfig.model_validate(tomli.load(f))
+def load_global_config() -> GlobalConfig:
+    try:
+        with open(Path.home() / GLOBAL_CONFIG_FILENAME, "rb") as f:
+            return GlobalConfig.model_validate(tomli.load(f))
+    except:
+        sys.exit(f"""yamapan: "~/{GLOBAL_CONFIG_FILENAME}" not found
+Please run the following command:
+
+echo "ros_install_prefix = \\"/opt/ros/$ROS_DISTRO\\"" > ~/{GLOBAL_CONFIG_FILENAME}""")
 
 
 def get_setup_sh_path() -> Path:
     setup_sh = get_workspace_path() / "install" / "setup.sh"
     if setup_sh.is_file():
         return setup_sh
-    local_config = load_local_config()
-    return local_config.ros_install_prefix / "setup.sh"
+    global_config = load_global_config()
+    return global_config.ros_install_prefix / "setup.sh"
 
 
 def run_command(
